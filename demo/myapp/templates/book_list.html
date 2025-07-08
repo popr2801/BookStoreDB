@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Book Store</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f7f8;
+            margin: 0;
+            padding: 2rem;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 1rem 1.2rem;
+            text-align: left;
+        }
+        th {
+            background-color: #2980b9;
+            color: white;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        tr:nth-child(even) {
+            background-color: #ecf0f1;
+        }
+        tr:hover {
+            background-color: #d6eaf8;
+            transition: background-color 0.3s ease;
+        }
+        td:last-child, th:last-child {
+            text-align: center;
+            width: 80px;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                display: none;
+            }
+            tr {
+                margin-bottom: 1.2rem;
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                background: #fff;
+                padding: 1rem;
+            }
+            td {
+                padding-left: 50%;
+                position: relative;
+                border: none;
+                border-bottom: 1px solid #ddd;
+            }
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
+                font-weight: 600;
+                color: #2980b9;
+                white-space: nowrap;
+            }
+            td:last-child {
+                border-bottom: none;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>All Books</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Genre</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Purchase</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td data-label="Title">{{ book.title }}</td>
+                <td data-label="Author">{{ book.author }}</td>
+                <td data-label="Genre">{{ book.genre }}</td>
+                <td data-label="Description">{{ book.description }}</td>
+                <td data-label="Price">${{ book.price }}</td>
+                <td data-label="Stock">{{ book.stoc }}</td>
+                <td>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="book_id" value="{{ book.bookid }}">
+                        <button type="submit" {% if book.stoc < 1 %}disabled{% endif %} style="background-color: #28a745; 
+                            color: white; 
+                            border: none; 
+                            padding: 8px 16px; 
+                            border-radius: 5px; 
+                            cursor: pointer;
+                            font-weight: bold;
+                            transition: background-color 0.3s ease;"
+                        onmouseover="this.style.backgroundColor='#218838';"
+                        onmouseout="this.style.backgroundColor='#28a745';">Buy
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

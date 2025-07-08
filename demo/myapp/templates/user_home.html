@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ user.firstname }}'s Homepage</title>
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #e74c3c;
+            --bg-color: #f4f7f9;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --muted-text: #777;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 60px auto;
+            background: var(--card-bg);
+            padding: 40px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.4em;
+            margin-bottom: 10px;
+        }
+
+        .user-info {
+            font-size: 17px;
+            color: var(--muted-text);
+            margin-bottom: 40px;
+        }
+
+        .user-info p {
+            margin: 6px 0;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8f8f8;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #388e3c;
+            transform: scale(1.03);
+        }
+
+        .logout-button {
+            background-color: var(--secondary-color);
+        }
+
+        .logout-button:hover {
+            background-color: #c0392b;
+        }
+
+        .no-books {
+            font-style: italic;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            table, th, td {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ user.firstname }}!</h1>
+
+        <div class="user-info">
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Phone:</strong> {{ user.phone }}</p>
+        </div>
+
+        <h2>Your Library</h2>
+        {% if owned_books %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Description</th>
+                    <th>Bought At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in owned_books %}
+                <tr>
+                    <td>{{ book.Title }}</td>
+                    <td>{{ book.Author }}</td>
+                    <td>{{ book.Description }}</td>
+                    <td>{{ book.BuyingDate }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p class="no-books">You haven't purchased any books yet.</p>
+        {% endif %}
+
+        <a href="{% url 'browse_books' %}" class="button">📚 Browse Books</a>
+        <a href="{% url 'logout' %}" class="button logout-button">🚪 Logout</a>
+    </div>
+</body>
+</html>

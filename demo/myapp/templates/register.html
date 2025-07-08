@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Add Profile</title>
+    <style>
+        body {
+             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #74ebd5, #9face6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background: white;
+            padding: 2.5rem 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 420px;
+            transition: transform 0.2s ease;
+        }
+
+        form:hover {
+            transform: translateY(-2px);
+        }
+
+        h2 {
+            text-align: center;
+            color: black;
+            margin-bottom: 1.8rem;
+            font-weight: 700;
+        }
+
+        form p {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+            color: #34495e;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.6rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input:focus {
+            border-color: #2980b9;
+            box-shadow: 0 0 0 3px rgba(41, 128, 185, 0.15);
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #2980b9;
+            color: white;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: background-color 0.3s ease,transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #2471a3;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 480px) {
+            form {
+                padding: 2rem;
+                border-radius: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        <h2>Create Your Profile</h2>
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>

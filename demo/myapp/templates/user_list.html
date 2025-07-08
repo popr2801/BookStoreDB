@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Book Store - Users</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f7f8;
+            margin: 0;
+            padding: 2rem;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 1rem 1.2rem;
+            text-align: left;
+        }
+        th {
+            background-color: #2980b9;
+            color: white;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        tr:nth-child(even) {
+            background-color: #ecf0f1;
+        }
+        tr:hover {
+            background-color: #d6eaf8;
+            transition: background-color 0.3s ease;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                display: none;
+            }
+            tr {
+                margin-bottom: 1.2rem;
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                background: #fff;
+                padding: 1rem;
+            }
+            td {
+                padding-left: 50%;
+                position: relative;
+                border: none;
+                border-bottom: 1px solid #ddd;
+                text-align: left;
+            }
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
+                font-weight: 600;
+                color: #2980b9;
+                white-space: nowrap;
+            }
+            td:last-child {
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>All Users</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td data-label="First Name">{{ user.firstname }}</td>
+                <td data-label="Last Name">{{ user.lastname }}</td>
+                <td data-label="Email">{{ user.email }}</td>
+                <td data-label="Phone">{{ user.phone }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
